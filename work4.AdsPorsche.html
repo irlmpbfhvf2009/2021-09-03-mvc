@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>廣告輪播</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    .adsimg {
+        width: 400px;
+        height: 200px;
+    }
+
+    .num {
+        width: 40px;
+        filter: grayscale(1);
+        cursor: pointer;
+    }
+
+    .btn {
+        width: 70px;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <nav>
+        <a href="work1.9x9.html">homework1</a>
+        <a href="work2.FormCheck.html">homework2</a>
+        <a href="work3.Comment.html">homework3</a>
+        <a href="work4.AdsPorsche.html">homework4</a>
+        <a href="work5.Data.html">homework5</a>
+        </nav><br><br>
+<h1>廣告輪播</h1><hr><br><br>
+    <div class="bor">
+        <div id="img_div">
+            <a target="_blank" href="https://www.porsche.co.jp/ms/pgtcap/tw/">
+                <img class="adsimg" src="images/AdsPorsche1.png"></a>
+            <a target="_blank" href="https://www.porsche.com/taiwan/zh-tw/models/911/911-models/carrera-cabriolet/">
+                <img class="adsimg" src="images/AdsPorsche2.png"></a>
+            <a target="_blank" href="https://www.porsche.com/taiwan/zh-tw/accessoriesandservice/financialservices/">
+                <img class="adsimg" src="images/AdsPorsche3.png"></a>
+            <a target="_blank" href="https://www.porsche.com/taiwan/zh-tw/models/cayenne/cayenne-models/cayenne-turbo-coupe/">
+                <img class="adsimg" src="images/AdsPorsche4.png"></a>
+            <a target="_blank" href="https://www.porsche.com/taiwan/zh-tw/models/macan/macan-models/">
+                <img class="adsimg" src="images/AdsPorsche5.png"></a>
+        </div>
+        <div>
+            <img class="num" id="1" src="images/1.gif">
+            <img class="num" id="2" src="images/2.gif">
+            <img class="num" id="3" src="images/3.gif">
+            <img class="num" id="4" src="images/4.gif">
+            <img class="num" id="5" src="images/5.gif">
+        </div>
+        <div>
+            <img id="pre" class="btn" src="images/pre.png" style="margin-left: 80px;">
+            <img id="playPause" class="btn" src="images/playPause.png">
+            <img id="next" class="btn" src="images/next.png">
+        </div>
+    </div>
+</body>
+<script>
+    let img = document.querySelectorAll(".adsimg");
+    let num = document.querySelectorAll(".num");
+    let imglen = img.length;//5
+    let timer = setInterval(autoPlay, 1000);
+    let count = 0;
+    autoPlay();
+    // 自動播放
+    function autoPlay() {
+        for (i = 0; i < imglen; i++) {
+            img[i].style = "display:none";
+            num[i].style = "filter: grayscale(1);";
+        }
+        if (count == 5) count = 0;
+        img[count].style = "display";
+        num[count].style = "filter: grayscale(0);width:50px";
+        count++;
+    }
+    //上一張
+    document.getElementById("pre").addEventListener("click", function () {
+        count--;
+        p();
+    });
+    //下一張
+    document.getElementById("next").addEventListener("click", function () {
+        count++;
+        p();
+    });
+    function p() {
+        clearInterval(timer);
+        timer = null;
+        for (i = 0; i < imglen; i++) {
+            img[i].style = "display:none";
+            num[i].style = "filter: grayscale(1);";
+        }
+        if (count == 5) count = 0;
+        img[count].style = "display";
+        num[count].style = "filter: grayscale(0);width:50px";
+    }
+    // 暫停播放,繼續播放
+    document.getElementById("playPause").addEventListener("click", function () {
+        if (timer == null) {
+            timer = setInterval(autoPlay, 1000);
+        } else {
+            clearInterval(timer);
+            timer = null;
+        }
+    });
+    //點擊貓爪
+    for (let j = 0; j < 5; j++) {
+        document.getElementById(j + 1).addEventListener("click", function () {
+            clearInterval(timer);
+            timer = null;
+            count = j;
+            for (var i = 0; i < img.length; i++) {
+                img[i].style = "display:none";
+                num[i].style = "filter: grayscale(1);";
+            }
+            img[j].style = "display";
+            num[j].style = "filter: grayscale(0);width:50px";
+        })
+    }
+    document.getElementById("img_div").addEventListener("mouseover", function () {
+        clearInterval(timer);
+        timer = null;
+    })
+    document.getElementById("img_div").addEventListener("mouseout", function () {
+        timer = setInterval(autoPlay, 1000);
+    })
+</script>
+</html>

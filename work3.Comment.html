@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>03eventHandlerMouseoverout.html</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav>
+        <a href="work1.9x9.html">homework1</a>
+        <a href="work2.FormCheck.html">homework2</a>
+        <a href="work3.Comment.html">homework3</a>
+        <a href="work4.AdsPorsche.html">homework4</a>
+        <a href="work5.Data.html">homework5</a>
+    </nav><br><br>
+    <h1>星星評分</h1>
+    <hr><br><br>
+    <div class="bor" style="width: 680px; height: 180px;">
+        <img id="idimg1" class="s" src="Images/star.gif" />
+        <img id="idimg2" class="s" src="Images/star.gif" />
+        <img id="idimg3" class="s" src="Images/star.gif" />
+        <img id="idimg4" class="s" src="Images/star.gif" />
+        <img id="idimg5" class="s" src="Images/star.gif" />
+        <div style="font-style: italic;">單擊星星評分,雙擊重置</div>
+        <div id="iddiv" style="font-size: 30px;">
+        </div>
+    </div>
+    <script>
+        let imgs = document.querySelectorAll("img.s");
+        let imgslen = imgs.length;
+        let theDiv = document.querySelector("#iddiv");
+        for (let img of imgs) {
+            img.addEventListener("mouseover", mouseover);
+            img.addEventListener("mouseout", mouseout);
+            img.addEventListener("click", click);
+            img.addEventListener("dblclick", dblclick);
+        }
+
+        function mouseover() {
+            let no = this.id.charAt(5);
+            for (let i = 0; i < no; i++) {
+                imgs[i].src = "images/chngstar.gif";
+            }
+            theDiv.innerHTML = `評分為...${no}顆星`;
+        }
+        function mouseout() {
+            let no = this.id.charAt(5);
+            for (let i = 0; i < no; i++) {
+                imgs[i].src = "images/star.gif";
+            }
+            theDiv.innerHTML = "";
+        }
+        function click() {
+            for (let img of imgs) {
+                img.removeEventListener("mouseover", mouseover);
+                img.removeEventListener("mouseout", mouseout);
+                img.removeEventListener("click", click);
+            }
+            let no = this.id.charAt(5);
+            for (let i = 0; i < no; i++) {
+                imgs[i].src = "images/chngstar.gif";
+            }
+            theDiv.innerHTML =`你給${no}顆星`;
+        }
+
+        function dblclick() {
+            for (let img of imgs) {
+                img.addEventListener("mouseover", mouseover);
+                img.addEventListener("mouseout", mouseout);
+                img.addEventListener("click", click);
+            }
+            theDiv.innerHTML =``;
+            for (let i = 0; i < 5; i++) {
+                imgs[i].src = "images/star.gif";
+            }
+        }
+    </script>
+</body>
+
+</html>

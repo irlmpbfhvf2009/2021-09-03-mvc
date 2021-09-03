@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+nav{
+    background-color: #000;
+    text-align: center;
+    font-size: 30px;
+}
+nav a{
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    padding: 6px 20px;
+    font-size: 26px;
+    background-color: #000;
+    transition: 0.5s;
+}
+nav a:hover{
+    background-color: #fa0;
+}
+body{
+    background-color: rgb(240, 239, 237);
+}
+hr {
+    border-top: 1px dotted silver;
+    margin-top: 30px;
+}
+.bor {
+    border: 3px solid rgb(111, 108, 108);
+    border-radius: 10px;
+    border-collapse: collapse;
+    padding: 30px;
+    margin: 0 auto;
+    width: 400px;
+}
+h1{
+    text-align: center;
+    color: rgb(20, 74, 56);
+}

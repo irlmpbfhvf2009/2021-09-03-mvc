@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表單驗證</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    .spanText {
+        font-size: 3px;
+        color: silver;
+    }
+</style>
+
+<body>
+    <nav>
+        <a href="work1.9x9.html">homework1</a>
+        <a href="work2.FormCheck.html">homework2</a>
+        <a href="work3.Comment.html">homework3</a>
+        <a href="work4.AdsPorsche.html">homework4</a>
+        <a href="work5.Data.html">homework5</a>
+    </nav><br><br>
+    <h1>表單驗證</h1>
+    <hr><br><br>
+    <form>
+        <fieldset class="bor">
+            <label>姓名：</label><input type="text" id="idName">
+            <span id="idspName"></span><br>
+            <span class="spanText">(1.不可空白2.至少兩個字以上3.必須全部為中文字)</span>
+            <hr>
+            <label>密碼：</label><input type="password" id="idPwd">
+            <span id="idspPwd"></span><br>
+            <span class="spanText">(1.不可空白2.至少6個字且必須包含英數字、特殊字元[!@#$%^&*])</span>
+            <hr>
+            <label>日期：</label><input type="text" id="idDate">
+            <span id="idspDate"></span><br>
+            <span class="spanText">格式:西元年/月/日(yyyy/mm/dd)</span>
+            <hr>
+        </fieldset>
+    </form>
+
+    <script>
+        // 姓名驗證
+        document.getElementById("idName").addEventListener("blur", checkName);
+        function checkName() {
+            let nameObj = document.getElementById("idName");
+            let nameObjVal = nameObj.value;
+            let spname = document.getElementById("idspName");
+            let nameObjValLen = nameObjVal.length;
+            let flag = false;
+            if (nameObjValLen == 0) {
+                spname.innerHTML = "<img src='images/error.png'>不可空白";
+            } else if (nameObjValLen < 3) {
+                spname.innerHTML = "<img src='images/error.png'>長度不足";
+            } else if (nameObjValLen > 2) {
+                for (let i = 0; i < nameObjValLen; i++) {
+                    let ch = nameObjVal.charCodeAt(i);
+                    if (ch >= 0x4e00 && ch <= 0x9fff)
+                        flag = true;
+                    else {
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag)
+                    spname.innerHTML = "<img src='images/correct.jpg'>正確";
+                else
+                    spname.innerHTML = "<img src='images/error.png'>格式錯誤"
+            }
+        }
+        // 密碼驗證
+        document.getElementById("idPwd").addEventListener("blur", checkPwd);
+        function checkPwd() {
+            let pwdObj = document.getElementById("idPwd");
+            let pwdObjVal = pwdObj.value;
+            let sppwd = document.getElementById("idspPwd");
+            let pwdObjValLen = pwdObjVal.length;
+            let flag1 = false, flag2 = false, flag3 = false;
+            if (pwdObjValLen == 0)
+                sppwd.innerHTML = "<img src='images/error.png'>不可空白";
+            else if (pwdObjValLen >= 6) {
+                for (let i = 0; i < pwdObjValLen; i++) {
+                    let ch = pwdObjVal.charAt(i).toUpperCase();
+                    if (ch >= "A" && ch <= "Z")
+                        flag1 = true;
+                    else if (ch >= "0" && ch <= "9")
+                        flag2 = true;
+                    else if (ch = "!,@,#,$,%,^,&,*")
+                        flag3 = true;
+
+                    console.log(`i=${i},ch=${ch},`);
+
+                    if (flag1 && flag2 && flag3) break;
+                }
+                if (flag1 && flag2 && flag3)
+                    sppwd.innerHTML = "<img src='images/correct.jpg'>正確";
+                else
+                    sppwd.innerHTML = "<img src='images/error.png'>格式錯誤";
+            } else {
+                sppwd.innerHTML = "<img src='images/error.png'>長度不足";
+            }
+        }
+        //日期驗證
+        document.getElementById("idDate").addEventListener("blur", checkDate);
+        function checkDate() {
+            let dateObj = document.getElementById("idDate");
+            let dateObjVal = dateObj.value;
+            let dateObjValLen = dateObjVal.length;
+            let spdate = document.getElementById("idspDate");
+            let strDate = new String(dateObjVal);
+            let aryDate = strDate.split('/');
+            let year = aryDate[0];
+            let month = aryDate[1];
+            let day = aryDate[2];
+            let date = new Date(year, month - 1, day);
+            let theYear = date.getFullYear();
+            let theMonth = date.getMonth() + 1;
+            let theDay = date.getDate();
+            if (dateObjValLen == 10 && year == theYear && month == theMonth && day == theDay) {
+                spdate.innerHTML = "<img src='images/correct.jpg'>正確";
+            } else if (dateObjValLen == 0) {
+                spdate.innerHTML = "請輸入日期";
+            } else {
+                spdate.innerHTML = "<img src='images/error.png'>格式錯誤";
+            }
+        }
+    </script>
+</body>
+
+</html>

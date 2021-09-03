@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日歷</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav>
+        <a href="work1.9x9.html">homework1</a>
+        <a href="work2.FormCheck.html">homework2</a>
+        <a href="work3.Comment.html">homework3</a>
+        <a href="work4.AdsPorsche.html">homework4</a>
+        <a href="work5.Data.html">homework5</a>
+    </nav><br><br>
+    <h1 style="font-size: 50px;">做不出來</h1><br><br>
+    <div class="bor" style="height: 150px;">
+        <h1 style="text-align: left;">welcome</h1>
+            <select id="idSelectYear"></select>
+            <select id="idSelectMonth"></select>
+            <select id="idSelectDay"></select>
+            <hr>
+            <div style="font-size: 20px;">日期選擇中</div>
+    </div>
+    <script>
+        let theYear=document.getElementById('idSelectYear');
+        let theMonth=document.getElementById('idSelectMonth');
+        let theDay=document.getElementById('idSelectDay');
+        let yy,mm,d,dNo;
+
+        theYear.addEventListener("change",addDay);
+        theMonth.addEventListener("change",addDay);
+
+        function addDay(){
+            yy=theYear.value;
+            mm=theMonth.value;
+            console.log(yy);
+            console.log(mm);
+            // d=new Date(2021,8,0);  //9月的第0天，就是 8月的最後一天  2021/8/31
+            d=new Date(yy,mm,n);
+            console.log(d);
+            dNo=d.getDate();
+            console.log(dNo);
+            for (let i = 1; i <= n; i++) {   //新增日
+            let opt = document.createElement("option");  
+            opt.value = i; 
+            opt.innerHTML = i; 
+            docFrag.appendChild(opt);
+        }
+        theDay.appendChild(docFrag);
+        }
+
+        let docFrag = document.createDocumentFragment();
+        for (let i = 2010; i <= 2025; i++) {   //新增年 
+            let opt = document.createElement("option");  //<option></option>
+            // opt.setAttribute("value", i); //<option value="1"></option>
+            // let optTxt = document.createTextNode(i);  //1
+            // opt.appendChild(optTxt);  //<option value="1">1</option>
+            opt.value = i; //<option value="1"></option>
+            opt.innerHTML = i;  //<option value="1">1</option>
+            docFrag.appendChild(opt);
+        }
+        theYear.appendChild(docFrag);
+
+        docFrag = document.createDocumentFragment();
+        for (let i = 1; i <= 12; i++) {   //新增月 
+            let opt = document.createElement("option");  //<option></option>
+            // opt.setAttribute("value", i); //<option value="1"></option>
+            // let optTxt = document.createTextNode(i);  //1
+            // opt.appendChild(optTxt);  //<option value="1">1</option>
+            opt.value = i; //<option value="1"></option>
+            opt.innerHTML = i;  //<option value="1">1</option>
+            docFrag.appendChild(opt);
+        }
+        theMonth.appendChild(docFrag);
+    </script>
+</body>
+
+</html>

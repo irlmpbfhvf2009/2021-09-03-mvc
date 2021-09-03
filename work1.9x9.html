@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <title>99乘法</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    table {
+        border: 3px solid rgb(20, 100, 220);
+        border-collapse: collapse;
+        margin: auto;
+    }
+
+    td,
+    th {
+        border: 3px solid rgb(220, 20, 143);
+        padding: 3px;
+        text-align: center;
+        font-size: 15px;
+        background-color: rgb(255, 238, 0);
+    }
+</style>
+
+<body>
+    <nav>
+        <a href="work1.9x9.html">homework1</a>
+        <a href="work2.FormCheck.html">homework2</a>
+        <a href="work3.Comment.html">homework3</a>
+        <a href="work4.AdsPorsche.html">homework4</a>
+        <a href="work5.Data.html">homework5</a>
+    </nav>
+    <br><br>
+    <h1>九九乘法表</h1>
+    <hr><br><br>
+    <script>
+        document.write(`<table>`);
+        document.write(`<tr>`);
+        for (a = 2; a < 10; a++) {
+            document.write(`<th>`);
+            document.write(`${a}的乘法表<br>`);
+            document.write(`</th>`);
+        }
+        document.write(`</tr>`);
+
+        for (i = 2; i < 10; i++) {
+            document.write(`<td>`);
+            for (j = 1; j < 10; j++) {
+                document.write(`${i}*${j}=${i * j}<br>`);
+            }
+            document.write(`</td>`);
+        }
+        document.write(`</table>`);
+    </script>
+</body>
+
+</html>
